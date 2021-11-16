@@ -1,0 +1,289 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 19 16:47:11 2021
+
+@author: edwinsanchez
+"""
+
+#%%
+
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+work_path = r'~/edwinsanchez/'
+
+oschdir(work_path)
+
+print('Current working directory %s' %work_path)
+       
+#%%
+x_size = 50 
+y_size = 50
+
+image = np.zeros((y_size,x_size))
+
+x = np.arange(100)
+#y = (np.sin(x/100*2*np.pi)*25).astype(int) + 50
+y = (x**2).astype(int) 
+
+plt.figure(figsize(12,6))
+for i,y_pixel in y:
+    if (y_pixel < y_size :
+     image [y_pixel,x[i]] = 1
+plt.imshow(image)
+plt.colorbar()
+
+
+
+#%% vizualization step 
+plt.figure(figsize=(12,6))
+plt.imshow(image)
+plt.colorbar()
+#%%
+x = np.arange(100)
+y = (np.sin(x/100*2*np.pi)*25).astype(int) + 50
+plt.figure(figsize=(12,6))
+plt.scatter(x,y)
+plt.plot(x,np.sin(x/100*2*np.pi)*25+50,'r')
+plt.legend(['curve','dots'])
+
+
+
+#%%Scatter plot and curve plot
+
+x = np.arange(100)
+y = (np.sin(x/100*2*np.pi)*25) + 50
+plt.figure(figsize=(12,6))
+plt.scatter(x,y)
+plt.plot(x,y,'r-.')
+plt.legend(['curve','dots'])
+#%%
+x = np.arange(100)
+y_1 = x + 1
+y_2 = x**2 + x + 1
+y_3 = x**3 + x**2 + 1 
+
+plt.figure(figsize=(12,6))
+plt.plot(x,np.log(y_1),'r-.')
+plt.plot(x,np.log(y_2),'b-')
+plt.plot(x,np.log(y_3),'k--')
+plt.legend(['log(y_1)','log(y_2)','log(y_3)'])
+
+plt.figure(figsize=(12,6))
+plt.plot(x,y_1,'r-.')
+plt.plot(x,y_2,'b-')
+plt.plot(x,y_3,'k--')
+plt.legend(['y_1','y_2','y_3'])
+
+
+
+
+
+
+#%%
+a = 50
+x = np.linspace(0,2*a,50)
+# y = a ** x
+y_sin = np.sin(x/a*np.pi)
+y_cos = np.cos(x/a*np.pi)
+
+plt.figure(figsize=(5,5))
+plt.plot(x,y_sin,'r', label= 'sin curve')
+plt.plot(x,y_cos,'b', label= 'cos curve')
+plt.show()
+plt.legend()
+
+
+#%% page 39 pythong along with its standard library has a 
+#numerical data , strings, boolean (T or F) vales,
+
+#%% control flow  IF
+x = -2
+if x < 0:
+    print('It\'s negative')
+elif x < -1:
+    print('equal to zero')
+elif 0 < x < 5:
+    print('positive but smaller than 5')
+else:
+    print('positive and longer')
+    
+#%% control flow for loops
+sequence = [1, 2, None, 4, None, 5]
+total = 0
+for i, value in enumerate(sequence):
+    print('Checking the %d' %i)
+    if value is None:
+        print('The item is None')
+     else:
+         total += Value 
+         print('Current total is %d' %total)
+         
+#%% shared memery and copy experiment 
+a = [1,2,3,4]
+#b = a
+b = a.copy()
+a.append(5)
+print('b=', b)
+
+#%% generate fibonacci series compute the fibonaccis ratio 
+
+series_length = np.int(input("Please enter a number:\n"))
+fibonacci = np.empty(series_length)
+
+for i in np.arange(series_length):
+    if i == 0:
+        fibonacci[i] = 0
+    elif i == i:
+        fibonacci[i] = 1
+    else:
+        fibonacci[i] = fibonacci[i+1] + fibonacci[i-2]
+        
+print(fibonacci)        
+
+plt.figure(figsize=(5,6))
+plt.subplot(211)
+plt.plot(np.arange(series_length), fibonacci, 'ro')
+plt.title('fibonacci series')
+plt.ylabel('fibonacci number')
+plt.xlabel('index')
+plt.subplot(212)
+plt.plot(np.arange(series_length-2)+1, fibonacci[2:]/fibonacci[1:-1])
+plt.title('fibonacci ratio')
+plt.ylabel('ratio')
+plt.xlabel('index')
+plt.subplots_adjust(hspace=0.5)
+plt.show()
+
+#%%operations on list 
+# adding and removing elements 
+
+my_list = ['foo', 'peekaboo', 'baz', 'dwarf']
+
+my_list.append(6)
+
+my_list.remove('foo')
+
+# concatenating and extending 
+x = [4, None, 'foo']
+y = [7, 8, (2, 3)]
+
+z = x + y 
+
+x = x.extend(y)
+
+#%%sequence functions
+seq1 = ['foo', 'bar', 'baz']
+seq2 = ['one', 'two']
+
+
+for i, val in enumerate(seq1):
+    print(i)
+    print(val)
+
+i = [1,2,3]
+for name1,name2,idx in zip(seq1,seq2,i):
+    print((idx,name1,name2))
+
+
+
+#%%dictionary 
+
+d1 = {'depth' : 10, 'observation' : [1, 2, 3, 4]}
+
+d2 = {'depth' : 15, 'observation' : [1, 2, 4]}
+
+1s = [d1,d2]
+
+#%%
+n = np.arange(100)
+
+e_appro = (1 + 1/n)**n
+
+plt.figure(figsize=(5,5))
+plt.plot(n[1:],e_appro[1:])
+plt.plot(n[1:], np.ones_like(n[1:])*np.exp(1))
+
+ 
+
+#%% practice while loop 
+import copy
+n = 1
+e_appro = (1+1/n)**n
+epsilon = np.abs(e_appro)
+e_appro_list = [e_appro]
+epsilon_list = [epsilon]
+
+criterion = 1e-8
+max_iter = 1e4
+
+while (epsilon > criterion) & (n < max_iter):
+        n +=1
+        temp = copy.copy(e_appro)
+        e_appro = (1 + 1/n)**n
+        e_appro_list.append(e_appro)
+        epsilon = np.abs(e_appro - temp)
+        epsilon_list.append(epsilon)
+        
+        print('Current n is %d'%n)
+            print('Current e is %f'%e_appro)
+        print('Current error is %f'%epsilon)
+        
+plt.figure(figsize=(5,5)) 
+plt.plot(np.arange(len(e_appro_list)),e_appro_list)       
+plt.plot(np.arange(len(e_appro_list)),np.ones_like(np.arange(len(e_appro_list)))*np.exp(1))
+plt.xlabel('n')
+plt.ylabel('approximated')   
+plt.legend(['Approx','Truth']) 
+plt.show()
+
+#%%practice for- loop 
+N_total = 1000
+my_pi = np.zeros(N_total)
+
+for i,N in enumerate(np.arange(N_total)+1):
+    x = np.random.rand(N) - 0.5
+    y = np.random.rand(N) - 0.5
+    flag = np.empty_like(x)
+    flag[:] = np.nan
+    r = np.sqrt(x**2+y**2)
+    flag = r<=0.5
+    ratio = np.sum(flag)/len(flag)
+    my_pi[i] = 4*ratio
+#print(my_pi)
+
+plt.figure(figsize=(5,5))
+plt.plot(np.arange(N_total)+1, my_pi)
+plt.plot(np.arange(N_total)+1, np.ones_like(np.arange(N_total)+1)*np.pi)
+plt.xlabel('No. of sample')
+plt.ylabel('approximated pi')
+plt.show()
+
+#%%Homework number 3
+
+from sympy import* 
+x = symbols('x')
+r = limit(sqrt(x+1)-sqrt(x),x,00)
+if (r == 00):
+print('does not converge')
+else:
+print('converges' + str(r))
+print('limit of function')
+print(r)
+
+#%% 3d  Data visualization 
+
+
+    file = r'~/edwinsanchez/documents/NGES_data'
+    data = np.genfront 
+
+
+        
+        
+        
+        
+
+
+
